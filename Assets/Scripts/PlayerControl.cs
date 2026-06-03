@@ -53,6 +53,8 @@ public class PlayerControl : MonoBehaviour
 
     private void Awake()
     {
+        //TESTING PURPOSES:
+        trackerLinePrefab = new LineRenderer();
         cc = GetComponent<CharacterController>();
         gelTrapsLeft = maxGelTraps;
         boraxUsesLeft = maxBoraxUses;
@@ -61,7 +63,7 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
-        if (!GameWorld.Instance.MatchActive) return;
+        //if (!GameWorld.Instance.MatchActive) return;
 
         HandleLook();
         HandleMovement();
