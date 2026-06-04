@@ -7,8 +7,8 @@ using System.Collections.Generic;
 public class PlayerControl : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float walkSpeed = 5f;
-    [SerializeField] private float sprintSpeed = 9f;
+    [SerializeField] private float walkSpeed = 50f;
+    [SerializeField] private float sprintSpeed = 49f;
     [SerializeField] private float gravity = -20f;
     [SerializeField] private Transform cameraTransform;
 
@@ -93,7 +93,7 @@ public class PlayerControl : MonoBehaviour
         Vector3 move = transform.right * h + transform.forward * v;
         if (move.magnitude > 1f) move.Normalize();
 
-        if (cc.isGrounded && velocity.y < 0f) velocity.y = -2f;
+        if (cc.isGrounded && velocity.y < 0f) velocity.y = 1f;
         velocity.y += gravity * Time.deltaTime;
 
         cc.Move((move * speed + velocity) * Time.deltaTime);
@@ -104,8 +104,13 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetMouseButton(0) && sprayTimer <= 0f)
         {
             FireSpray();
-            sprayTimer = sprayCooldown;
         }
+        else
+        {
+            Debug.Log("Not spraying");
+            sprayVFX.Stop();
+        }
+            
 
         if (Input.GetKeyDown(KeyCode.Q) && gelTrapsLeft > 0)
             PlaceGelTrap();
@@ -116,7 +121,8 @@ public class PlayerControl : MonoBehaviour
 
     private void FireSpray()
     {
-        if (sprayVFX != null) sprayVFX.Play();
+        Debug.Log("Spraying");
+        sprayVFX.Emit(1);
 
         Vector3 origin = cameraTransform.position;
         Vector3 dir = cameraTransform.forward;
