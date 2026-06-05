@@ -1,0 +1,49 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1780612952",
+        "python_version": "3.9.13 (main, Oct 13 2022, 21:23:06) [MSC v.1916 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\User\\miniconda3\\envs\\mlagents\\Scripts\\mlagents-learn ant_config.yaml --run-id=ant_run_01 --resume",
+        "mlagents_version": "0.30.0",
+        "mlagents_envs_version": "0.30.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.13.1+cpu",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1780612980"
+    },
+    "total": 28.1098271,
+    "count": 1,
+    "self": 0.006603800000000604,
+    "children": {
+        "run_training.setup": {
+            "total": 0.076287,
+            "count": 1,
+            "self": 0.076287
+        },
+        "TrainerController.start_learning": {
+            "total": 28.0269363,
+            "count": 1,
+            "self": 0.00011230000000139739,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 27.810480599999998,
+                    "count": 1,
+                    "self": 27.810480599999998
+                },
+                "TrainerController._save_models": {
+                    "total": 0.21634339999999952,
+                    "count": 1,
+                    "self": 0.0013998000000015054,
+                    "children": {
+                        "RLTrainer._checkpoint": {
+                            "total": 0.21494359999999801,
+                            "count": 1,
+                            "self": 0.21494359999999801
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

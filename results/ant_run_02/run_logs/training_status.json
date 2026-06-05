@@ -1,0 +1,56 @@
+{
+    "AntBehavior": {
+        "checkpoints": [
+            {
+                "steps": 36864,
+                "file_path": "results\\ant_run_02\\AntBehavior\\AntBehavior-36864.onnx",
+                "reward": null,
+                "creation_time": 1780613215.5681098,
+                "auxillary_file_paths": [
+                    "results\\ant_run_02\\AntBehavior\\AntBehavior-36864.pt"
+                ]
+            },
+            {
+                "steps": 49659,
+                "file_path": "results\\ant_run_02\\AntBehavior\\AntBehavior-49659.onnx",
+                "reward": null,
+                "creation_time": 1780614151.6365168,
+                "auxillary_file_paths": [
+                    "results\\ant_run_02\\AntBehavior\\AntBehavior-49659.pt"
+                ]
+            },
+            {
+                "steps": 57825,
+                "file_path": "results\\ant_run_02\\AntBehavior\\AntBehavior-57825.onnx",
+                "reward": null,
+                "creation_time": 1780614492.5053709,
+                "auxillary_file_paths": [
+                    "results\\ant_run_02\\AntBehavior\\AntBehavior-57825.pt"
+                ]
+            },
+            {
+                "steps": 97784,
+                "file_path": "results\\ant_run_02\\AntBehavior\\AntBehavior-97784.onnx",
+                "reward": null,
+                "creation_time": 1780615031.1106083,
+                "auxillary_file_paths": [
+                    "results\\ant_run_02\\AntBehavior\\AntBehavior-97784.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 97784,
+            "file_path": "results\\ant_run_02\\AntBehavior.onnx",
+            "reward": null,
+            "creation_time": 1780615031.1106083,
+            "auxillary_file_paths": [
+                "results\\ant_run_02\\AntBehavior\\AntBehavior-97784.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cpu"
+    }
+}

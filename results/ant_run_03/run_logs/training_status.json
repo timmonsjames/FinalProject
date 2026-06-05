@@ -1,0 +1,65 @@
+{
+    "AntBehavior": {
+        "checkpoints": [
+            {
+                "steps": 3499971,
+                "file_path": "results\\ant_run_03\\AntBehavior\\AntBehavior-3499971.onnx",
+                "reward": 25.430334726969402,
+                "creation_time": 1780621112.017065,
+                "auxillary_file_paths": [
+                    "results\\ant_run_03\\AntBehavior\\AntBehavior-3499971.pt"
+                ]
+            },
+            {
+                "steps": 3999976,
+                "file_path": "results\\ant_run_03\\AntBehavior\\AntBehavior-3999976.onnx",
+                "reward": 28.485001266002655,
+                "creation_time": 1780621594.250507,
+                "auxillary_file_paths": [
+                    "results\\ant_run_03\\AntBehavior\\AntBehavior-3999976.pt"
+                ]
+            },
+            {
+                "steps": 4499961,
+                "file_path": "results\\ant_run_03\\AntBehavior\\AntBehavior-4499961.onnx",
+                "reward": 16.697500467300415,
+                "creation_time": 1780622073.9086423,
+                "auxillary_file_paths": [
+                    "results\\ant_run_03\\AntBehavior\\AntBehavior-4499961.pt"
+                ]
+            },
+            {
+                "steps": 4999996,
+                "file_path": "results\\ant_run_03\\AntBehavior\\AntBehavior-4999996.onnx",
+                "reward": null,
+                "creation_time": 1780622534.0219886,
+                "auxillary_file_paths": [
+                    "results\\ant_run_03\\AntBehavior\\AntBehavior-4999996.pt"
+                ]
+            },
+            {
+                "steps": 5064380,
+                "file_path": "results\\ant_run_03\\AntBehavior\\AntBehavior-5064380.onnx",
+                "reward": null,
+                "creation_time": 1780622656.293298,
+                "auxillary_file_paths": [
+                    "results\\ant_run_03\\AntBehavior\\AntBehavior-5064380.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 5064380,
+            "file_path": "results\\ant_run_03\\AntBehavior.onnx",
+            "reward": null,
+            "creation_time": 1780622656.293298,
+            "auxillary_file_paths": [
+                "results\\ant_run_03\\AntBehavior\\AntBehavior-5064380.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cpu"
+    }
+}
