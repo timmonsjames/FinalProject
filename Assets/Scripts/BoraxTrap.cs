@@ -26,7 +26,7 @@ public class BoraxTrap : MonoBehaviour
         foreach (var c in hits)
         {
             if (Random.value <= killChance)
-                c.GetComponent<AntAI>()?.GetCaught();
+                c.GetComponentInParent<IKillable>()?.GetCaught();
         }
 
         Destroy(gameObject);

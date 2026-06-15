@@ -142,9 +142,17 @@ public class ExterminatorAI : MonoBehaviour
 
         if (sprayVFX != null && !sprayVFX.isPlaying) sprayVFX.Play();
 
+        // Hit the locked target if it's inside the spray cone.
         Collider[] hits = Physics.OverlapSphere(currentTarget.position, sprayRadius, antMask);
         foreach (var c in hits)
-            c.GetComponent<AntAI>()?.GetCaught();
+            c.GetComponentInParent<IKillable>()?.GetCaught();
+
+        // Backup: catch the ant wherever it actually is, not where it was last frame.
+        // The target moves every frame (evading), and a 0.5m sphere at last-frame's
+        // position misses more often than it hits.
+        Collider[] muzzle = Physics.OverlapSphere(transform.position, sprayRange, antMask);
+        foreach (var c in muzzle)
+            c.GetComponentInParent<IKillable>()?.GetCaught();
     }
 
     private void ActivateTracker()

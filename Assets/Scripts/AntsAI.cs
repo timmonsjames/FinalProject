@@ -5,7 +5,7 @@ using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class AntAI : Agent
+public class AntAI : Agent, IKillable
 {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 2.5f;

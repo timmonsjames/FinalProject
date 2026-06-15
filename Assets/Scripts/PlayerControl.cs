@@ -122,17 +122,44 @@ public class PlayerControl : MonoBehaviour
     private void FireSpray()
     {
         Debug.Log("Spraying");
+
         sprayVFX.Emit(1);
 
         Vector3 origin = cameraTransform.position;
         Vector3 dir = cameraTransform.forward;
-        Vector3 endpoint = Physics.Raycast(origin, dir, out RaycastHit wallHit, sprayRange)
-                           ? wallHit.point
-                           : origin + dir * sprayRange;
+
+        Vector3 endpoint =
+            Physics.Raycast(origin, dir, out RaycastHit wallHit, sprayRange)
+            ? wallHit.point
+            : origin + dir * sprayRange;
 
         Collider[] hits = Physics.OverlapSphere(endpoint, sprayRadius, antMask);
+
+        Debug.Log("Hits found: " + hits.Length);
+
         foreach (var c in hits)
-            c.GetComponent<AntAI>()?.GetCaught();
+        {
+            Debug.Log("Hit: " + c.name);
+
+            var killable = c.GetComponentInParent<IKillable>();
+
+            if (killable != null)
+            {
+                Debug.Log("Killing ant");
+                killable.GetCaught();
+            }
+            else
+            {
+                Debug.Log("No IKillable found");
+            }
+        }
+
+        Collider[] nearby = Physics.OverlapSphere(origin, sprayRadius * 2f, antMask);
+
+        foreach (var c in nearby)
+            c.GetComponentInParent<IKillable>()?.GetCaught();
+
+        sprayTimer = sprayCooldown;
     }
 
     private void PlaceGelTrap()

@@ -3,7 +3,7 @@ using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 using UnityEngine;
 
-public class AntAgent : Agent
+public class AntAgent : Agent, IKillable
 {
     [Header("Settings")]
     public Transform[] fruits;
@@ -106,5 +106,13 @@ public class AntAgent : Agent
                 targetFruit = fruits[currentFruitIndex];
             }
         }
+    }
+
+    public void GetCaught()
+    {
+        AddReward(-1f);
+        EndEpisode();
+        gameObject.SetActive(false);
+        GameWorld.Instance?.OnAntKilled();
     }
 }
