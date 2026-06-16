@@ -5,7 +5,10 @@ using System.Collections.Generic;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerControl : MonoBehaviour
+
+
 {
+   
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 50f;
     [SerializeField] private float sprintSpeed = 49f;
@@ -121,47 +124,25 @@ public class PlayerControl : MonoBehaviour
 
     private void FireSpray()
     {
-        Debug.Log("Spraying");
+        if (sprayVFX != null)
+            sprayVFX.Emit(1);
 
-        sprayVFX.Emit(1);
+        Collider[] hits = Physics.OverlapSphere(
+            cameraTransform.position + cameraTransform.forward * 2f,
+            1.5f
+        );
 
-        Vector3 origin = cameraTransform.position;
-        Vector3 dir = cameraTransform.forward;
-
-        Vector3 endpoint =
-            Physics.Raycast(origin, dir, out RaycastHit wallHit, sprayRange)
-            ? wallHit.point
-            : origin + dir * sprayRange;
-
-        Collider[] hits = Physics.OverlapSphere(endpoint, sprayRadius, antMask);
-
-        Debug.Log("Hits found: " + hits.Length);
-
-        foreach (var c in hits)
+        foreach (Collider hit in hits)
         {
-            Debug.Log("Hit: " + c.name);
-
-            var killable = c.GetComponentInParent<IKillable>();
-
-            if (killable != null)
+            if (hit.CompareTag("Ant"))
             {
-                Debug.Log("Killing ant");
-                killable.GetCaught();
-            }
-            else
-            {
-                Debug.Log("No IKillable found");
+                Debug.Log("Killed ant: " + hit.name);
+                Destroy(hit.transform.root.gameObject);
             }
         }
 
-        Collider[] nearby = Physics.OverlapSphere(origin, sprayRadius * 2f, antMask);
-
-        foreach (var c in nearby)
-            c.GetComponentInParent<IKillable>()?.GetCaught();
-
         sprayTimer = sprayCooldown;
     }
-
     private void PlaceGelTrap()
     {
         if (!Physics.Raycast(cameraTransform.position, Vector3.down, out RaycastHit hit, 3f)) return;
