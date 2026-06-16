@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class AntAgent : Agent, IKillable
 {
+    [SerializeField] private FruitSpawner fruitSpawner;
     [Header("Settings")]
     public Transform[] fruits;
     public float moveSpeed = 3f;
@@ -26,14 +27,16 @@ public class AntAgent : Agent, IKillable
         fruitsCollected = 0;
         totalReward = 0f;
         episodeCount++;
-        FruitSpawner spawner = transform.parent.GetComponentInChildren<FruitSpawner>();
-        if (spawner != null)
-            spawner.SpawnFruits();
+
+        if (fruitSpawner != null)
+            fruitSpawner.SpawnFruits();
 
         currentFruitIndex = 0;
+
         if (fruits != null && fruits.Length > 0)
             targetFruit = fruits[currentFruitIndex];
     }
+
 
     public override void CollectObservations(VectorSensor sensor)
     {

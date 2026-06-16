@@ -5,11 +5,13 @@ TagManager:
   serializedVersion: 3
   tags:
   - Fruit
+  - Food
+  - Ant
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ant
   - Water
   - UI
   - 

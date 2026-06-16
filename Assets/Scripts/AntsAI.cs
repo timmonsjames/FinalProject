@@ -59,6 +59,8 @@ public class AntAI : Agent, IKillable
             nav.ResetPath();
     }
 
+    
+
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(nav.velocity.normalized);
@@ -237,6 +239,8 @@ public class AntAI : Agent, IKillable
 
     public void GetCaught()
     {
+        Debug.Log("ANT KILLED");
+
         AddReward(penaltyCaught);
         EndEpisode();
         gameObject.SetActive(false);
