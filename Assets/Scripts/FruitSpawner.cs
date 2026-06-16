@@ -67,7 +67,7 @@ public class FruitSpawner : MonoBehaviour
 
         // Find the ant only within this TrainingArea
         AntAgent ant = transform.parent.GetComponentInChildren<AntAgent>();
-        if (ant != null)
-            ant.fruits = spawnedFruits;
+        //if (ant != null)
+            //ant.fruits = spawnedFruits;
     }
 }

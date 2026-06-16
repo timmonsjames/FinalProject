@@ -2242,7 +2242,6 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  fruits: []
   moveSpeed: 3
   rotateSpeed: 180
   boundaryLimit: 23
@@ -5546,8 +5545,6 @@ GameObject:
   - component: {fileID: 527488126}
   - component: {fileID: 527488125}
   - component: {fileID: 527488127}
-  - component: {fileID: 527488128}
-  - component: {fileID: 527488129}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -5664,43 +5661,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!114 &527488128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 527488124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 762e4b9ba560de4419dbd15316ce63a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameWorld
-  antPrefab: {fileID: 217703536}
-  antCount: 10
-  antSpawnPoints:
-  - {fileID: 1456069254}
-  playerPrefab: {fileID: 0}
-  playerSpawnPoint: {fileID: 0}
-  matchDuration: 300
---- !u!114 &527488129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 527488124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f3d92e44cacfd448954cae925e83c7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FoodSpawning
-  foodPrefabs:
-  - {fileID: 1829371231341652, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
-  - {fileID: 1724972533694550, guid: 63e523ab5d9ce7348b431ae1d689a54d, type: 3}
-  spawnPoints:
-  - {fileID: 1053411510}
-  totalFoodCount: 50
 --- !u!1001 &530693516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5825,6 +5785,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1454667177053095354, guid: 838d990199647ad44bbfc7c6557e6075, type: 3}
   m_PrefabInstance: {fileID: 533232842}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &538413815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 538413817}
+  - component: {fileID: 538413816}
+  m_Layer: 0
+  m_Name: FoodSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &538413816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538413815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f3d92e44cacfd448954cae925e83c7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FoodSpawning
+  foodPrefabs:
+  - {fileID: 1829371231341652, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
+  - {fileID: 1763817136346132, guid: 0f3575c567ebe8241a4a6ad511fd7017, type: 3}
+  - {fileID: 1638444836145330, guid: 031f4f4b1f7d8b7489da0919e18ceac3, type: 3}
+  spawnPoints:
+  - {fileID: 1053411510}
+  totalFoodCount: 50
+--- !u!4 &538413817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538413815}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 97.47993, y: 0.8, z: 227.15607}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &540922935
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9877,6 +9888,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6589922707131914914, guid: 6d65c592c4ee87a429f7f11febe8009e, type: 3}
   m_PrefabInstance: {fileID: 904291686}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &907179510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 907179512}
+  - component: {fileID: 907179511}
+  m_Layer: 0
+  m_Name: GameWorld
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &907179511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907179510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 762e4b9ba560de4419dbd15316ce63a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameWorld
+  antPrefab: {fileID: 217703536}
+  antCount: 10
+  antSpawnPoints:
+  - {fileID: 1053411510}
+  playerPrefab: {fileID: 220458248}
+  playerSpawnPoint: {fileID: 1456069254}
+  matchDuration: 300
+--- !u!4 &907179512
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907179510}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 97.47993, y: 0.8, z: 227.15607}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &913112810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21983,3 +22045,5 @@ SceneRoots:
   - {fileID: 217703535}
   - {fileID: 1456069254}
   - {fileID: 1053411510}
+  - {fileID: 538413817}
+  - {fileID: 907179512}

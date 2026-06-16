@@ -2,11 +2,11 @@ using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class AntAgent : Agent, IKillable
+public class AntAgent : Agent
 {
     [Header("Settings")]
-    public Transform[] fruits;
     public float moveSpeed = 3f;
     public float rotateSpeed = 180f;
     public float boundaryLimit = 23f;
@@ -15,8 +15,15 @@ public class AntAgent : Agent, IKillable
     [HideInInspector] public float totalReward = 0f;
     [HideInInspector] public int episodeCount = 0;
 
-    private Transform targetFruit;
-    private int currentFruitIndex = 0;
+    private FoodSpawning foodSpawner;
+    private Transform targetFood;
+
+    void Start()
+    {
+        foodSpawner = FindObjectOfType<FoodSpawning>();
+        if (foodSpawner == null)
+            Debug.LogError("AntAgent: FoodSpawning not found in scene!");
+    }
 
     public override void OnEpisodeBegin()
     {
@@ -26,13 +33,11 @@ public class AntAgent : Agent, IKillable
         fruitsCollected = 0;
         totalReward = 0f;
         episodeCount++;
-        FruitSpawner spawner = transform.parent.GetComponentInChildren<FruitSpawner>();
-        if (spawner != null)
-            spawner.SpawnFruits();
 
-        currentFruitIndex = 0;
-        if (fruits != null && fruits.Length > 0)
-            targetFruit = fruits[currentFruitIndex];
+        if (foodSpawner != null)
+            foodSpawner.SpawnFood();
+
+        UpdateTarget();
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -40,12 +45,12 @@ public class AntAgent : Agent, IKillable
         sensor.AddObservation(transform.localPosition.x);
         sensor.AddObservation(transform.localPosition.z);
 
-        if (targetFruit != null)
+        if (targetFood != null)
         {
-            Vector3 dirToFruit = (targetFruit.position - transform.position).normalized;
-            sensor.AddObservation(dirToFruit.x);
-            sensor.AddObservation(dirToFruit.z);
-            sensor.AddObservation(Vector3.Distance(transform.position, targetFruit.position));
+            Vector3 dirToFood = (targetFood.position - transform.position).normalized;
+            sensor.AddObservation(dirToFood.x);
+            sensor.AddObservation(dirToFood.z);
+            sensor.AddObservation(Vector3.Distance(transform.position, targetFood.position));
         }
         else
         {
@@ -65,12 +70,7 @@ public class AntAgent : Agent, IKillable
 
         AddReward(-0.001f);
 
-        float distanceFromCenter = Vector3.Distance(
-            new Vector3(transform.localPosition.x, 0, transform.localPosition.z),
-            Vector3.zero
-        );
-
-        if (distanceFromCenter > boundaryLimit || transform.localPosition.y < -1f)
+        if (transform.localPosition.y < -1f)
         {
             AddReward(-1f);
             EndEpisode();
@@ -86,16 +86,14 @@ public class AntAgent : Agent, IKillable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Fruit"))
+        if (other.gameObject.CompareTag("Food"))
         {
-            Destroy(other.gameObject);
+            foodSpawner?.OnFoodEaten(other.gameObject);
 
             AddReward(1.0f);
             totalReward += 1.0f;
             fruitsCollected++;
-
-            currentFruitIndex++;
-            if (currentFruitIndex >= fruits.Length)
+            if (foodSpawner != null && foodSpawner.AllEaten)
             {
                 AddReward(2.0f);
                 totalReward += 2.0f;
@@ -103,16 +101,43 @@ public class AntAgent : Agent, IKillable
             }
             else
             {
-                targetFruit = fruits[currentFruitIndex];
+                UpdateTarget();
             }
         }
     }
 
-    public void GetCaught()
+    private void UpdateTarget()
     {
-        AddReward(-1f);
-        EndEpisode();
-        gameObject.SetActive(false);
-        GameWorld.Instance?.OnAntKilled();
+        if (foodSpawner == null) return;
+
+        List<Vector3> foodPositions = foodSpawner.GetActiveFoodPositions();
+        if (foodPositions.Count == 0)
+        {
+            targetFood = null;
+            return;
+        }
+
+        Vector3 closest = foodPositions[0];
+        float minDist = Vector3.Distance(transform.position, closest);
+
+        foreach (Vector3 pos in foodPositions)
+        {
+            float dist = Vector3.Distance(transform.position, pos);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                closest = pos;
+            }
+        }
+
+        GameObject[] allFood = GameObject.FindGameObjectsWithTag("Food");
+        foreach (GameObject food in allFood)
+        {
+            if (Vector3.Distance(food.transform.position, closest) < 0.01f)
+            {
+                targetFood = food.transform;
+                break;
+            }
+        }
     }
 }

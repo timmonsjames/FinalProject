@@ -76,6 +76,18 @@ public class GameWorld : MonoBehaviour
 
     private void SpawnAnts()
     {
+        if (antSpawnPoints == null || antSpawnPoints.Length == 0)
+        {
+            Debug.LogError("GameWorld: No ant spawn points assigned in Inspector!");
+            return;
+        }
+
+        if (antPrefab == null)
+        {
+            Debug.LogError("GameWorld: No ant prefab assigned in Inspector!");
+            return;
+        }
+
         List<Transform> shuffled = new List<Transform>(antSpawnPoints);
         for (int i = shuffled.Count - 1; i > 0; i--)
         {
